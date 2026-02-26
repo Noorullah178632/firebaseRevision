@@ -1,5 +1,5 @@
 import 'package:firebase_project/firebase_options.dart';
-import 'package:firebase_project/view/splash_view.dart';
+import 'package:firebase_project/view/auth/auth_gates.dart';
 import 'package:firebase_project/viewModel/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
           colorSchemeSeed: Colors.deepPurple,
         ),
-        home: SplashView(),
+        home: const AuthGates(),
       ),
     );
   }

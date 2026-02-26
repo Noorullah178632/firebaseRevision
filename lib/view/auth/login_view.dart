@@ -1,7 +1,10 @@
 import 'package:firebase_project/view/auth/signup_view.dart';
+import 'package:firebase_project/view/posts/post_view.dart';
+import 'package:firebase_project/viewModel/auth_view_model.dart';
 import 'package:firebase_project/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -110,10 +113,28 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: 30.h),
 
               // Show loader or button
-              RoundedButton(
-                title: "Login",
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {}
+              Consumer<AuthViewModel>(
+                builder: (context, vm, child) {
+                  return RoundedButton(
+                    title: "Login",
+                    isLoading: vm.isLoading,
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        final success = await vm.login(
+                          emailController.text.trim(),
+                          passwordController.text,
+                        );
+                        if (!context.mounted) return;
+                        if (success) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => PostView()),
+                            (predicate) => (false),
+                          );
+                        }
+                      }
+                    },
+                  );
                 },
               ),
               SizedBox(height: 30.h),
