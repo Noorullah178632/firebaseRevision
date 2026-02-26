@@ -1,3 +1,4 @@
+import 'package:firebase_project/view/auth/phone_login_view.dart';
 import 'package:firebase_project/view/auth/signup_view.dart';
 import 'package:firebase_project/view/posts/post_view.dart';
 import 'package:firebase_project/viewModel/auth_view_model.dart';
@@ -136,6 +137,29 @@ class _LoginViewState extends State<LoginView> {
                     },
                   );
                 },
+              ),
+              SizedBox(height: 20.h),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => PhoneLoginView()),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(10.r),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    border: Border.all(color: Colors.black),
+                    color: Colors.deepPurple,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Login with phone",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               ),
               SizedBox(height: 30.h),
 
